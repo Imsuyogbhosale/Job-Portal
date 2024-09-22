@@ -51,13 +51,6 @@ const Login = () => {
                 <Label htmlFor="r2">Recruiter</Label>
               </div>
             </RadioGroup>
-            <div className="flex items-center gap-2">
-              <Label>Profile</Label>
-              <Input
-                accept="image/*"
-                type="file"
-              />
-            </div>
           </div>
           <Button type="submit" className="w-full my-4 mt-2 bg-gray-500 hover:bg-[#6A38C2]">Sign Up</Button>
           <span className="text-sm">Already Have an Account? <Link to='/Login' className="text-blue-700">Login</Link></span>
