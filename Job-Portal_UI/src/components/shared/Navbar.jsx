@@ -3,29 +3,30 @@ import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover
 import { Button } from '../ui/button';
 import { Avatar, } from '@radix-ui/react-avatar';
 import { LogOut, User2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 // import React from 'react';
 // import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const user = false;
-     // Authontication purpuse 
+    // Authontication purpuse ///
     return (
-        <div className='bg-white '>
+        <div className='bg-slate-200'>
             <div className='  flex  justify-between h-16 mx-auto max-w-screen-lg'>
                 <div>
-                    <h1 className='text-2xl font-bold'>Job<span className='text-[#f83002]'>Portal</span></h1>
+                    <h1 className='text-2xl font-bold mt-3'>Job<span className='text-[#f83002]'>Portal</span></h1>
                 </div>
                 <div className='flex items-center '>
                     <ul className='flex font-medium gap-5 items-center'>
                         <li>Home</li>
-                        <li>Home</li>
-                        <li>Home</li>
+                        <li>Jobs</li>
+                        <li>Brows</li>
                     </ul>
                     {
                         !user ? (
                             <div className='flex items-center gap-2 mx-5'>
-                                <Button variant='outline' className='hover:bg-neutral-600'>LogIN</Button>
-                                <Button variant='outline'className='bg-gray-500 hover:bg-[#6A38C2]'>SignUp</Button>
+                                <Link to='/Login'> <Button variant='outline' className='bg-gray-500 hover:bg-[#6A38C2]'>LOGIN</Button></Link>
+                                <Link to='/Signup'><Button variant='outline' className='bg-gray-500 hover:bg-[#6A38C2]'>SignUp</Button></Link>
                             </div>
                         ) : (
                             <Popover>
