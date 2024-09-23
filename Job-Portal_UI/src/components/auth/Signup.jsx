@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../shared/Navbar';
 import { Label } from '@radix-ui/react-label';
 import { Input } from '../ui/input';
@@ -7,12 +7,37 @@ import { RadioGroup } from '@radix-ui/react-radio-group';
 import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
 
+
+
 const Signup = () => {
+
+  const [input, setInput] = useState({
+    fullname: "",
+    email: "",
+    password: "",
+    PhoneNo: "",
+    role: "",
+    file: ""
+  })
+
+  const SetDatahandler = (e) => {
+    // eslint-disable-next-line no-undef
+    setInput({ ...input, [e.target.name]: e.target.value });
+  }
+
+  const ChangeFileHandler =(e)=>{
+     setInput({...input , file :e.target.file?.[0]})
+  }
+ const Submithandler =async(e)=>{
+   e.preventDefault()
+ }
+
+  console.log("inpute Data", input)
   return (
     <div className='bg-slate-100 min-h-screen'>
       <Navbar />
-      <div className='flex items-center justify-center max-w-7xl mt-5 mx-auto py-2'> 
-        <form className='w-4/5 md:w-1/2 border border-gray-200 rounded-md py-5 px-6 bg-slate-50 mb-10'>
+      <div className='flex items-center justify-center max-w-7xl mt-5 mx-auto py-2'>
+        <form onSubmit={Submithandler} className='w-4/5 md:w-1/2 border border-gray-200 rounded-md py-5 px-6 bg-slate-50 mb-10'>
           <h1 className='font-bold text-xl text-center mb-5'>SignUp</h1>
 
           {/* Full Name Field */}
@@ -21,6 +46,9 @@ const Signup = () => {
             <Input
               className='px-3 mt-2'
               type="text"
+              name='fullname'
+              value={input.fullname}
+              onChange={SetDatahandler}
               placeholder="Enter Name"
             />
           </div>
@@ -31,6 +59,9 @@ const Signup = () => {
             <Input
               className='px-3 mt-1'
               type="email"
+              value={input.email}
+              name="email"
+              onChange={SetDatahandler}
               placeholder="Enter Email"
             />
           </div>
@@ -41,6 +72,9 @@ const Signup = () => {
             <Input
               className='px-3 mt-1'
               type="password"
+              value={input.password}
+              name="password"
+              onChange={SetDatahandler}
               placeholder="Enter Password"
             />
           </div>
@@ -51,6 +85,9 @@ const Signup = () => {
             <Input
               className='px-3 mt-1'
               type="number"
+              name="PhoneNo"
+              value={input.PhoneNo}
+              onChange={SetDatahandler}
               placeholder="ENTER PHONENO"
             />
           </div>
@@ -63,6 +100,8 @@ const Signup = () => {
                   type="radio"
                   name="role"
                   value="student"
+                  checked={input.role === "student"}
+                  onChange={SetDatahandler}
                   className="cursor-pointer"
                 />
                 <Label htmlFor="r1">student</Label>
@@ -72,6 +111,8 @@ const Signup = () => {
                   type="radio"
                   name="role"
                   value="Recruiter"
+                  checked={input.role === "Recruiter"}
+                  onChange={SetDatahandler}
                   className="cursor-pointer"
                 />
                 <Label htmlFor="r2">Recruiter</Label>
@@ -82,6 +123,8 @@ const Signup = () => {
               <Input
                 accept="image/*"
                 type="file"
+
+                onChange={ChangeFileHandler}
               />
             </div>
           </div>
