@@ -42,7 +42,7 @@ app.use("/api/v1/company",companyRoutes);
 app.use("/api/v1/Job",JobRoutes);
 app.use("api/v1/Application", applicationRoute);
 
-
+// http://localhost:8000/api/v1/user
 app.listen(PORT, () => {
     connectDB()
     console.log(`Server running on port ${PORT}`);

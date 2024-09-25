@@ -15,7 +15,7 @@ const Signup = () => {
     fullname: "",
     email: "",
     password: "",
-    phoneNo: "",
+    phoneNumber: "",
     role: "",
     file: ""
   });
@@ -36,7 +36,7 @@ const Signup = () => {
     formData.append('fullname', input.fullname);
     formData.append('email', input.email);
     formData.append('password', input.password);
-    formData.append('phoneNo', input.phoneNo);
+    formData.append('phoneNumber', input.phoneNumber);
     formData.append('role', input.role);
     
     if (input.file) {
@@ -45,7 +45,7 @@ const Signup = () => {
 
     e.preventDefault();
     try {
-      const res = await axios.post(`${USER_API_END_POINT}/login`, formData, {
+      const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         },
@@ -60,6 +60,9 @@ const Signup = () => {
       console.log(error);
     }
   };
+
+
+  console.log('All DATA ', input)
 
   return (
     <div className='bg-slate-100 min-h-screen'>
@@ -113,8 +116,8 @@ const Signup = () => {
             <Input
               className='px-3 mt-1'
               type="text"
-              name="phoneNo"
-              value={input.phoneNo}
+              name="phoneNumber"
+              value={input.phoneNumber}
               onChange={SetDatahandler}
               placeholder="Enter Phone No."
             />
@@ -128,8 +131,8 @@ const Signup = () => {
                   type="radio"
                   id="r1"
                   name="role"
-                  value="student"
-                  checked={input.role === "student"}
+                  value="Student"
+                  checked={input.role === "Student"}
                   onChange={SetDatahandler}
                   className="cursor-pointer"
                 />

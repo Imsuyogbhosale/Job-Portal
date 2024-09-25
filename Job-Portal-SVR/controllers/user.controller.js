@@ -1,7 +1,8 @@
 import { User } from "../models/user.models.js";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
-
+// import i from "../utils/datauri.js";
+// import cloudinary from "../utils/cloudinary.js";
 
 // register Api 
 
@@ -19,6 +20,10 @@ export const register = async (req, res) => {
             });
         }
 
+        const file = req.file;
+        // const fileUri = getDataUri(file);
+        // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+
         const user = await User.findOne({ email });
         if (user) {
             return res.status(400).json({
@@ -34,7 +39,10 @@ export const register = async (req, res) => {
             email,
             phoneNumber,
             password: hashPassword,
-            role
+            role,
+            // profile:{
+            //     profilePhoto:cloudResponse.secure_url,
+            // }
         });
 
         return res.status(201).json({
@@ -286,7 +294,7 @@ export const updateProfile = async (req, res) => {
     try {
         const { fullname, email, bio, skills } = req.body;
         const file = req.file;
-
+        console.log('file',file)
         // Assuming the user ID is set in the middleware
         const userID = req.id;
        
