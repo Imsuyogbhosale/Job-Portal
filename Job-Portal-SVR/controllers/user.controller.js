@@ -134,7 +134,7 @@ export const login = async (req, res) => {
     try {
         const { email, password, role } = req.body;
 
-        // Log request body for debugging
+        
         console.log("Login Request Body:", req.body);
 
         if (!email || !role || !password) {

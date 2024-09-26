@@ -6,6 +6,9 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { RadioGroup } from '@radix-ui/react-radio-group';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { USER_REG_API_END_POINT } from '@/utils/constant';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
@@ -20,11 +23,25 @@ const Login = () => {
     // eslint-disable-next-line no-undef
     setInput({ ...input, [e.target.name]: e.target.value });
   }
-  console.log("inputeData login", input)
+    
+   const Navigate = useNavigate()
   const Submithandler = async (e) => {
-    e.preventDefault()  // hitha APi SATHI ahe 
+    e.preventDefault() 
+    try {
+      const res = await axios.post(`${USER_REG_API_END_POINT}/login`, input , {
+        Headers : {
+      "content-Type" : "application/json"
+        },
+        withCredentials : true
+      } );
+      if(res.status.sucess){
+        Navigate('/')
+      }
+    } catch (error) {
+      console.log(error)
+    }
   } 
-
+  
   return (
     <div className="h-screen flex flex-col">
       <Navbar />
@@ -37,6 +54,7 @@ const Login = () => {
               className="px-3 mt-2 mx-auto"
               type="email"
               name = "email"
+              value = {input.email}
               onChange = {SetDatahandler}
               placeholder="Enter email"
             />
@@ -46,7 +64,8 @@ const Login = () => {
             <Input
               className="px-3 mt-2 mx-auto"
               type="password"
-              name = "passeord"
+              name = "password"
+              value = {input.password}
               onChange = {SetDatahandler}
               placeholder="Enter password"
             />
@@ -57,12 +76,12 @@ const Login = () => {
                 <Input
                   type="radio"
                   name="role"
-                  value="student"
-                  checked = {input.role === "student"}
+                  value="Student"
+                  checked = {input.role === "Student"}
                   onChange = {SetDatahandler}
                   className="cursor-pointer"
                 />
-                <Label htmlFor="r1">student</Label>
+                <Label htmlFor="r1">Student</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <Input
