@@ -43,7 +43,7 @@ const Login = () => {
   } 
   
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col " style={{backgroundImage: "url('/jobpic.jpg')"}}>
       <Navbar />
       <div className="flex-grow flex items-center justify-center">
         <form onSubmit={Submithandler} className="w-1/2 py-12 px-8 border rounded-md bg-slate-100 my-4">
